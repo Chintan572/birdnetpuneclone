@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // 1. STICKY HEADER ON SCROLL
   // ============================================================
   const mainHeader = document.querySelector('.main-header');
+  const heroSection = document.querySelector('.hero');
   
   function handleScroll() {
     if (window.scrollY > 60) {
@@ -15,9 +16,16 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       mainHeader.classList.remove('scrolled');
     }
+
+    if (heroSection) {
+      const heroRect = heroSection.getBoundingClientRect();
+      const headerHeight = mainHeader.offsetHeight || 0;
+      mainHeader.classList.toggle('over-hero', heroRect.bottom > headerHeight);
+    }
   }
 
   window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleScroll);
   handleScroll();
 
 
@@ -83,22 +91,37 @@ document.addEventListener('DOMContentLoaded', function () {
   // 4. HERO TEXT ROTATOR
   // ============================================================
   const rotatorWords = document.querySelectorAll('.rotator-word');
+  const heroBgImages = document.querySelectorAll('.hero-bg-image');
   let currentWordIndex = 0;
 
-  function rotateWords() {
-    if (rotatorWords.length === 0) return;
-
+  function setHeroSlide(index) {
     rotatorWords.forEach(function (word) {
       word.classList.remove('active');
     });
 
+    heroBgImages.forEach(function (image) {
+      image.classList.remove('active');
+      image.style.animation = 'none';
+    });
+
+    rotatorWords[index].classList.add('active');
+
+    if (heroBgImages[index]) {
+      heroBgImages[index].offsetHeight;
+      heroBgImages[index].style.animation = '';
+      heroBgImages[index].classList.add('active');
+    }
+  }
+
+  function rotateWords() {
+    if (rotatorWords.length === 0) return;
+
     currentWordIndex = (currentWordIndex + 1) % rotatorWords.length;
-    rotatorWords[currentWordIndex].classList.add('active');
+    setHeroSlide(currentWordIndex);
   }
 
   if (rotatorWords.length > 0) {
-    // Set first word as active
-    rotatorWords[0].classList.add('active');
+    setHeroSlide(0);
     setInterval(rotateWords, 2800);
   }
 
