@@ -5,29 +5,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   // ============================================================
-  // 1. STICKY HEADER ON SCROLL
+  // 1. MOBILE NAV TOGGLE (previously sticky header)
   // ============================================================
-  const mainHeader = document.querySelector('.main-header');
-  const heroSection = document.querySelector('.hero');
-  
-  function handleScroll() {
-    if (window.scrollY > 60) {
-      mainHeader.classList.add('scrolled');
-    } else {
-      mainHeader.classList.remove('scrolled');
-    }
-
-    if (heroSection) {
-      const heroRect = heroSection.getBoundingClientRect();
-      const headerHeight = mainHeader.offsetHeight || 0;
-      mainHeader.classList.toggle('over-hero', heroRect.bottom > headerHeight);
-    }
-  }
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  window.addEventListener('resize', handleScroll);
-  handleScroll();
-
 
   // ============================================================
   // 2. MOBILE NAV TOGGLE

@@ -193,68 +193,27 @@ input, select, textarea {
   left: 0;
   width: 100%;
   z-index: 100;
-  background: rgba(248,250,252,.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(226,232,240,.7);
-  transition: box-shadow .3s ease, background .3s ease, border-color .3s ease;
-}
-
-.main-header.scrolled {
-  background: rgba(248,250,252,.94);
-  border-bottom-color: rgba(203,213,225,.75);
-  box-shadow: 0 8px 26px rgba(15,23,42,.06);
-}
-
-.main-header.over-hero {
   background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border-bottom-color: transparent;
-  box-shadow: none;
+  padding-top: 1rem;
 }
 
-.main-header.over-hero .navbar {
-  justify-content: center;
-}
+.nav-links-pill { /* Using existing .nav-links below for the flex container, applying these properties directly */ }
 
-.main-header.over-hero .nav-brand,
-.main-header.over-hero .nav-actions {
-  display: none;
-}
-
-.main-header.over-hero .nav-links {
-  padding: 0.55rem 1.1rem;
-  border-radius: var(--radius-full);
-  background: rgba(9,13,22,.16);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.main-header.over-hero .nav-links a {
-  color: rgba(255,255,255,.9);
-}
-
-.main-header.over-hero .nav-links a::after {
-  background: var(--brand-300);
-}
-
-.main-header.over-hero .nav-links a:hover {
-  color: #fff;
-}
-
-.main-header.over-hero .nav-hamburger span {
-  background: #fff;
-}
 
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: clamp(1rem, 2.4vw, 1.75rem);
-  padding: 0.55rem var(--container-px);
-  max-width: var(--max-w);
+  padding: 0.55rem 1.1rem;
+  width: max-content;
+  max-width: calc(100% - 2rem);
   margin: 0 auto;
+  border-radius: var(--radius-full);
+  background: rgba(9,13,22,.16);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-brand {
@@ -276,22 +235,22 @@ input, select, textarea {
 .nav-brand-text {
   display: flex;
   flex-direction: column;
-  border-left: 1px solid rgba(203,213,225,.75);
+  border-left: 1px solid rgba(255,255,255,0.2);
   padding-left: 0.75rem;
 }
 
 .nav-brand-text span:first-child {
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--slate-700);
+  color: rgba(255,255,255,1);
   line-height: 1;
 }
 
 .nav-brand-text span:last-child {
-  font-size: 0.6rem;
-  color: var(--slate-400);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.9);
   font-weight: 500;
   margin-top: 0.125rem;
 }
@@ -305,7 +264,7 @@ input, select, textarea {
 .nav-links a {
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--slate-600);
+  color: rgba(255,255,255,.9);
   padding: 0.2rem 0;
   position: relative;
   transition: color .2s;
@@ -318,12 +277,12 @@ input, select, textarea {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--brand-600);
+  background: var(--brand-300);
   border-radius: 1px;
   transition: width .3s var(--ease-out);
 }
 
-.nav-links a:hover { color: var(--brand-600); }
+.nav-links a:hover { color: #fff; }
 .nav-links a:hover::after { width: 100%; }
 
 .nav-actions {
@@ -2205,11 +2164,40 @@ input, select, textarea {
     font-size: 0.68rem;
   }
 
-  .services-grid { grid-template-columns: 1fr; }
-  .pillars-grid { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: 1fr; }
-  .testimonials-grid { grid-template-columns: 1fr; }
-  .areas-grid { grid-template-columns: 1fr; }
+  .about-metrics,
+  .services-grid,
+  .pillars-grid,
+  .gallery-grid,
+  .testimonials-grid,
+  .areas-grid { 
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .about-metrics::-webkit-scrollbar,
+  .services-grid::-webkit-scrollbar,
+  .pillars-grid::-webkit-scrollbar,
+  .gallery-grid::-webkit-scrollbar,
+  .testimonials-grid::-webkit-scrollbar,
+  .areas-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .about-metrics > *,
+  .services-grid > *,
+  .pillars-grid > *,
+  .gallery-grid > *,
+  .testimonials-grid > *,
+  .areas-grid > * {
+    flex: 0 0 85%;
+    min-width: 0;
+    scroll-snap-align: center;
+  }
 
   .footer-columns { grid-template-columns: 1fr; gap: 1.5rem; }
 
